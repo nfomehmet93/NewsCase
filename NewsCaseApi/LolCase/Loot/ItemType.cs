@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LolCase.Champions
-    public class Ashe
+namespace LolCase.Loot
+{
+    public enum ItemType
     {
+        Hp=1,
+        Xp=2
     }
 }

@@ -3,19 +3,30 @@ using LolCase.Champions;
 using System.Collections.Generic;
 using System.Text;
 using LolCase.Base;
+using LolCase.Loot;
+using System.Linq;
 
 namespace LolCase.HeroType
 {
     public class Adc : Hero
     {
-        public override void DamageCalc()
+        public override void AddItem(Item item)
         {
-            throw new NotImplementedException();
+            Items.Add(item);
+            if (ItemType.Hp == item.Type)
+                Healt += item.AdcValue;
+            else
+                Damage += item.AdcValue;
         }
 
-        public override void HealtCalc()
+        public override bool CheckItem()
         {
-            throw new NotImplementedException();
+            if (Items.Any(x => x.Type == ItemType.Xp)&& Items.Any(x => x.Type == ItemType.Hp))
+                return true;
+
+            return false;
         }
+
+      
     }
 }

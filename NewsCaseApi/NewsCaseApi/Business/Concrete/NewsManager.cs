@@ -18,7 +18,7 @@ namespace NewsCaseApi.Business.Concrete
             if (_new==null)
                 return new ResponseViewModel() { Message = "Haber Bulunamadı!", IsSuccess = false };
 
-            return new ResponseViewModel() { Data = news, IsSuccess = true };
+            return new ResponseViewModel() { Data = _new, IsSuccess = true };
         }
 
         public ResponseViewModel GetNewsList()

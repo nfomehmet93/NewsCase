@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NewsCaseApi.Business.Abstract;
@@ -10,6 +11,7 @@ namespace NewsCaseApi.Controllers
 {
     [Route("contents")]
     [ApiController]
+    [EnableCors("CorsPolicy")]
     public class NewsController : ControllerBase
     {
         private readonly INewsService _newsService;
