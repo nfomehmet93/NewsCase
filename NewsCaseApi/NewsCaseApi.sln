@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29209.62
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsCaseApi", "NewsCaseApi\NewsCaseApi.csproj", "{D6E923D5-54E7-4DE8-B12B-26A641153F13}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LolCase", "LolCase\LolCase.csproj", "{4089E8DB-BD0B-424D-B015-635F6D42541F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D6E923D5-54E7-4DE8-B12B-26A641153F13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6E923D5-54E7-4DE8-B12B-26A641153F13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6E923D5-54E7-4DE8-B12B-26A641153F13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6E923D5-54E7-4DE8-B12B-26A641153F13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4089E8DB-BD0B-424D-B015-635F6D42541F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4089E8DB-BD0B-424D-B015-635F6D42541F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4089E8DB-BD0B-424D-B015-635F6D42541F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4089E8DB-BD0B-424D-B015-635F6D42541F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {54DFAB5D-77AE-4FE8-9A17-AA177F69171F}
+	EndGlobalSection
+EndGlobal
