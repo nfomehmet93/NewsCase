@@ -8,20 +8,25 @@ using System.Threading.Tasks;
 
 namespace NewsCaseApi.Business.Concrete
 {
-    public class AmpManager: IAmpService
+    public class AmpManager : IAmpService
     {
 
         public string AmpValidation(string html)
         {
+            html = ReplaceWithHttps(html);
             html = UpdateAmpImages(html);
             html = UpdateAmpIframe(html);
             html = ReplaceWithLink("script", html);
             html = ReplaceWithLink("iframe", html);
-            html = ReplaceWithStyle("//*[@style]",html);
+            html = ReplaceWithStyle("//*[@style]", html);
             html = ReplaceWithOnclick("//*[@onclick]", html);
             return html;
         }
-        private string ReplaceWithOnclick(string tag,string response)
+        private string ReplaceWithHttps(string response)
+        {
+           return response.Replace("http://", "https://");
+        }
+        private string ReplaceWithOnclick(string tag, string response)
         {
             var doc = GetHtmlDocument(response);
             var elements = doc.DocumentNode.SelectNodes(tag);
@@ -42,7 +47,7 @@ namespace NewsCaseApi.Business.Concrete
         {
             var doc = GetHtmlDocument(response);
             var elements = doc.DocumentNode.SelectNodes(tag);
-            if (elements!=null)
+            if (elements != null)
             {
                 foreach (var htmlNode in elements)
                 {
@@ -79,7 +84,6 @@ namespace NewsCaseApi.Business.Concrete
 
                 response = response.Replace(original, replacement);
             }
-
             return response;
         }
         private string UpdateAmpImages(string response)
@@ -95,23 +99,30 @@ namespace NewsCaseApi.Business.Concrete
             {
                 HtmlNode.ElementsFlags.Add("amp-img", HtmlElementFlag.Closed);
             }
-
             foreach (var imgTag in imageList)
             {
                 var original = imgTag.OuterHtml;
                 var replacement = imgTag.Clone();
                 replacement.Name = ampImage;
                 replacement.Attributes.Remove("caption");
-                if (replacement.Attributes["width"] ==null)
+                if (replacement.Attributes["width"] == null)
                     replacement.Attributes.Add("width", "1.33");
+                else
+                {
+                    replacement.Attributes.Remove("width");
+                    replacement.Attributes.Add("width", "1.33");
+                }
 
                 if (replacement.Attributes["height"] == null)
                     replacement.Attributes.Add("height", "1");
-               
-
+                else
+                {
+                    replacement.Attributes.Remove("height");
+                    replacement.Attributes.Add("height", "1");
+                }
+                replacement.Attributes.Add("layout", "responsive");
                 response = response.Replace(original, replacement.OuterHtml);
             }
-
             return response;
         }
         private string UpdateAmpIframe(string response)
@@ -133,12 +144,8 @@ namespace NewsCaseApi.Business.Concrete
                 var original = iFrameTag.OuterHtml;
                 var replacement = iFrameTag.Clone();
                 replacement.Name = ampImage;
-                //replacement.Attributes.Remove("caption");
-                //replacement.Attributes.Remove("width");
-                //replacement.Attributes.Remove("height");
-                //replacement.Attributes.Add("width", "1");
-                //replacement.Attributes.Add("height", "1");
-
+                replacement.Attributes.Add("sandbox", "allow-scripts allow-same-origin");
+                replacement.Attributes.Add("layout", "responsive");
                 response = response.Replace(original, replacement.OuterHtml);
             }
 
