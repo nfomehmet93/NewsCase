@@ -14,7 +14,7 @@ namespace LolCase.HeroType
         {
             Items.Add(item);
             if (ItemType.Hp == item.Type)
-                Healt += item.AdcValue;
+                Health += item.AdcValue;
             else
                 Damage += item.AdcValue;
         }

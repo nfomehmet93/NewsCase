@@ -13,14 +13,14 @@ namespace LolCase.Base
         }
         public string Name { get; set; }
         public TypeEnum Type { get; set; }
-        public int Healt { get; set; } = 0;
+        public int Health { get; set; } = 0;
         public int Damage { get; set; } = 0;
         public List<Item> Items { get; set; }
         public  void WriteProperties()
         {
             Console.WriteLine("Tip : {0}",Type.ToString());
             Console.WriteLine("İsim : {0}",Name);
-            Console.WriteLine("Sağlık Değeri : {0} {1}", Healt, ItemType.Hp.ToString());
+            Console.WriteLine("Sağlık Değeri : {0} {1}", Health, ItemType.Hp.ToString());
             Console.WriteLine("Atak Gücü : {0} {1}", Damage, ItemType.Xp.ToString());
         }
         public abstract void AddItem(Item item);

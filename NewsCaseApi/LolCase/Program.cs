@@ -24,162 +24,20 @@ namespace LolCase
                 Tuple<bool, int> nCheck = CheckNumber(1, 9);
                 check = nCheck.Item1;
                 cNumber = nCheck.Item2;
-            } while (check);
-            var champion = champions.FirstOrDefault(x => x.Id == cNumber);
-            if (champion != null)
-            {
-                var items = GetItems();
-                switch (champion.Type)
+                var champion = champions.FirstOrDefault(x => x.Id == cNumber);
+                if (champion == null)
                 {
-                    case TypeEnum.Adc:
-                        Adc adc = new Adc();
-                        adc.Name = champion.Name;
-                        adc.Type = TypeEnum.Adc;
-                        do
-                        {
-                            foreach (var item in items)
-                            {
-                                Console.WriteLine("{0}-{1}", item.Id, item.Name);
-                            }
-                            Console.WriteLine("Lütfen Şampiyon Ekipmanlarını Seçiniz!");
-                            do
-                            {
-                                Tuple<bool, int> nCheck = CheckNumber(1, 9);
-                                check = nCheck.Item1;
-                                cNumber = nCheck.Item2;
-
-                            } while (check);
-                            check = true;
-                            var selectedItem = items.FirstOrDefault(x => x.Id == cNumber);
-                            if (selectedItem == null)
-                                Environment.Exit(0);
-
-                            adc.AddItem(selectedItem);
-                             Console.WriteLine("Şampiyon Ekipmanı seçimine devam edilsin mi! Y:Evet N:Hayır");
-                            string result = string.Empty;
-                            do
-                            {
-                                result = Console.ReadLine();
-                                if (result != "N" && result != "Y")
-                                    Console.WriteLine("Yanlış seçim yaptınız!Şampiyon Ekipmanı seçimine devam edilsin mi! Y:Evet N:Hayır");
-                                else
-                                    check = false;
-                            } while (check);
-                            check = true;
-                            if (result == "N")
-                            {
-                                if (adc.CheckItem())
-                                {
-                                    check = false;
-                                    adc.WriteProperties();
-                                }
-                                else
-                                    Console.WriteLine("Şampiyon Ekipmanı tamamlanmamıştır ekipman eklemeye devam ediniz.");
-                            }
-                        }
-                        while (check);
-                        break;
-                    case TypeEnum.Support:
-                        Support support = new Support();
-                        support.Name = champion.Name;
-                        support.Type = TypeEnum.Support;
-                        do
-                        {
-                            foreach (var item in items)
-                            {
-                                Console.WriteLine("{0}-{1}", item.Id, item.Name);
-                            }
-                            Console.WriteLine("Lütfen Şampiyon Ekipmanlarını Seçiniz!");
-                            do
-                            {
-                                Tuple<bool, int> nCheck = CheckNumber(1, 9);
-                                check = nCheck.Item1;
-                                cNumber = nCheck.Item2;
-
-                            } while (check);
-                            check = true;
-                            var selectedItem = items.FirstOrDefault(x => x.Id == cNumber);
-                            if (selectedItem == null)
-                                Environment.Exit(0);
-
-                            support.AddItem(selectedItem);
-                            Console.WriteLine("Şampiyon Ekipmanı seçimine devam edilsin mi! Y:Evet N:Hayır");
-                            string result = string.Empty;
-                            do
-                            {
-                                result = Console.ReadLine();
-                                if (result != "N" && result != "Y")
-                                    Console.WriteLine("Yanlış seçim yaptınız!Şampiyon Ekipmanı seçimine devam edilsin mi! Y:Evet N:Hayır");
-                                else
-                                    check = false;
-                            } while (check);
-                            check = true;
-                            if (result == "N")
-                            {
-                                if (support.CheckItem())
-                                {
-                                    check = false;
-                                    support.WriteProperties();
-                                }
-                                else
-                                    Console.WriteLine("Şampiyon Ekipmanı tamamlanmamıştır ekipman eklemeye devam ediniz.");
-                            }
-                        }
-                        while (check);
-                        break;
-                    case TypeEnum.Magician:
-                        Magician magician = new Magician();
-                        magician.Name = champion.Name;
-                        magician.Type = TypeEnum.Magician;
-                        do
-                        {
-                            foreach (var item in items)
-                            {
-                                Console.WriteLine("{0}-{1}", item.Id, item.Name);
-                            }
-                            Console.WriteLine("Lütfen Şampiyon Ekipmanlarını Seçiniz!");
-                            do
-                            {
-                                Tuple<bool, int> nCheck = CheckNumber(1, 9);
-                                check = nCheck.Item1;
-                                cNumber = nCheck.Item2;
-
-                            } while (check);
-                            check = true;
-                            var selectedItem = items.FirstOrDefault(x => x.Id == cNumber);
-                            if (selectedItem == null)
-                                Environment.Exit(0);
-
-                            magician.AddItem(selectedItem);
-                            Console.WriteLine("Şampiyon Ekipmanı seçimine devam edilsin mi! Y:Evet N:Hayır");
-                            string result = string.Empty;
-                            do
-                            {
-                                result = Console.ReadLine();
-                                if (result != "N" && result != "Y")
-                                    Console.WriteLine("Yanlış seçim yaptınız!Şampiyon Ekipmanı seçimine devam edilsin mi! Y:Evet N:Hayır");
-                                else
-                                    check = false;
-                            } while (check);
-                            check = true;
-                            if (result == "N")
-                            {
-                                if (magician.CheckItem())
-                                {
-                                    check = false;
-                                    magician.WriteProperties();
-                                }
-                                else
-                                    Console.WriteLine("Şampiyon Ekipmanı tamamlanmamıştır ekipman eklemeye devam ediniz.");
-                            }
-                        }
-                        while (check);
-                        break;
+                    Console.WriteLine("Şeçim ekranında beklenmeyen hata!");
+                    Console.ReadKey();
+                    check = true;
+                    Console.WriteLine("Lütfen Tekrar Seçim Yapınız!");
+                }
+                else
+                {
+                    SelectChampions(champion);
                 }
 
-            }
-            else
-                Console.WriteLine("Şeçim ekranında beklenmeyen hata!");
+            } while (check);
 
             Console.ReadKey();
 
@@ -301,7 +159,7 @@ namespace LolCase
             items.Add(gun);
             return items;
         }
-        public static Tuple<bool, int> CheckNumber(int min,int max)
+        public static Tuple<bool, int> CheckNumber(int min, int max)
         {
             int CNumber = 0;
             bool NCheck = true;
@@ -311,11 +169,164 @@ namespace LolCase
             else
             {
                 if (CNumber < min || CNumber > max)
-                    Console.WriteLine("Lütfen {0 }ile {1} arası giriş yapınız!",min,max);
+                    Console.WriteLine("Lütfen {0 }ile {1} arası giriş yapınız!", min, max);
                 else
                     NCheck = false;
             }
             return Tuple.Create(NCheck, CNumber);
+        }
+        public static void SelectChampions(Champion champion)
+        {
+            int cNumber = 0;
+            bool check = true;
+            var items = GetItems();
+            switch (champion.Type)
+            {
+                case TypeEnum.Adc:
+                    Adc adc = new Adc();
+                    adc.Name = champion.Name;
+                    adc.Type = TypeEnum.Adc;
+                    do
+                    {
+                        foreach (var item in items)
+                        {
+                            Console.WriteLine("{0}-{1}", item.Id, item.Name);
+                        }
+                        Console.WriteLine("Lütfen Şampiyon Ekipmanlarını Seçiniz!");
+                        do
+                        {
+                            Tuple<bool, int> adcCheck = CheckNumber(1, 9);
+                            check = adcCheck.Item1;
+                            cNumber = adcCheck.Item2;
+
+                        } while (check);
+                        check = true;
+                        var selectedItem = items.FirstOrDefault(x => x.Id == cNumber);
+                        if (selectedItem == null)
+                            Environment.Exit(0);
+
+                        adc.AddItem(selectedItem);
+                        Console.WriteLine("Şampiyon Ekipmanı seçimine devam edilsin mi! Y:Evet N:Hayır");
+                        string result = string.Empty;
+                        do
+                        {
+                            result = Console.ReadLine();
+                            if (result != "N" && result != "Y")
+                                Console.WriteLine("Yanlış seçim yaptınız!Şampiyon Ekipmanı seçimine devam edilsin mi! Y:Evet N:Hayır");
+                            else
+                                check = false;
+                        } while (check);
+                        check = true;
+                        if (result == "N")
+                        {
+                            if (adc.CheckItem())
+                            {
+                                check = false;
+                                adc.WriteProperties();
+                            }
+                            else
+                                Console.WriteLine("Şampiyon Ekipmanı tamamlanmamıştır ekipman eklemeye devam ediniz.");
+                        }
+                    }
+                    while (check);
+                    break;
+                case TypeEnum.Support:
+                    Support support = new Support();
+                    support.Name = champion.Name;
+                    support.Type = TypeEnum.Support;
+                    do
+                    {
+                        foreach (var item in items)
+                        {
+                            Console.WriteLine("{0}-{1}", item.Id, item.Name);
+                        }
+                        Console.WriteLine("Lütfen Şampiyon Ekipmanlarını Seçiniz!");
+                        do
+                        {
+                            Tuple<bool, int> supCheck = CheckNumber(1, 9);
+                            check = supCheck.Item1;
+                            cNumber = supCheck.Item2;
+
+                        } while (check);
+                        check = true;
+                        var selectedItem = items.FirstOrDefault(x => x.Id == cNumber);
+                        if (selectedItem == null)
+                            Environment.Exit(0);
+
+                        support.AddItem(selectedItem);
+                        Console.WriteLine("Şampiyon Ekipmanı seçimine devam edilsin mi! Y:Evet N:Hayır");
+                        string result = string.Empty;
+                        do
+                        {
+                            result = Console.ReadLine();
+                            if (result != "N" && result != "Y")
+                                Console.WriteLine("Yanlış seçim yaptınız!Şampiyon Ekipmanı seçimine devam edilsin mi! Y:Evet N:Hayır");
+                            else
+                                check = false;
+                        } while (check);
+                        check = true;
+                        if (result == "N")
+                        {
+                            if (support.CheckItem())
+                            {
+                                check = false;
+                                support.WriteProperties();
+                            }
+                            else
+                                Console.WriteLine("Şampiyon Ekipmanı tamamlanmamıştır ekipman eklemeye devam ediniz.");
+                        }
+                    }
+                    while (check);
+                    break;
+                case TypeEnum.Magician:
+                    Magician magician = new Magician();
+                    magician.Name = champion.Name;
+                    magician.Type = TypeEnum.Magician;
+                    do
+                    {
+                        foreach (var item in items)
+                        {
+                            Console.WriteLine("{0}-{1}", item.Id, item.Name);
+                        }
+                        Console.WriteLine("Lütfen Şampiyon Ekipmanlarını Seçiniz!");
+                        do
+                        {
+                            Tuple<bool, int> magCheck = CheckNumber(1, 9);
+                            check = magCheck.Item1;
+                            cNumber = magCheck.Item2;
+
+                        } while (check);
+                        check = true;
+                        var selectedItem = items.FirstOrDefault(x => x.Id == cNumber);
+                        if (selectedItem == null)
+                            Environment.Exit(0);
+
+                        magician.AddItem(selectedItem);
+                        Console.WriteLine("Şampiyon Ekipmanı seçimine devam edilsin mi! Y:Evet N:Hayır");
+                        string result = string.Empty;
+                        do
+                        {
+                            result = Console.ReadLine();
+                            if (result != "N" && result != "Y")
+                                Console.WriteLine("Yanlış seçim yaptınız!Şampiyon Ekipmanı seçimine devam edilsin mi! Y:Evet N:Hayır");
+                            else
+                                check = false;
+                        } while (check);
+                        check = true;
+                        if (result == "N")
+                        {
+                            if (magician.CheckItem())
+                            {
+                                check = false;
+                                magician.WriteProperties();
+                            }
+                            else
+                                Console.WriteLine("Şampiyon Ekipmanı tamamlanmamıştır ekipman eklemeye devam ediniz.");
+                        }
+                    }
+                    while (check);
+                    break;
+            }
         }
     }
 }

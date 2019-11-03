@@ -13,7 +13,7 @@ namespace LolCase.HeroType
         {
             Items.Add(item);
             if (ItemType.Hp == item.Type)
-                Healt += item.MagicianValue;
+                Health += item.MagicianValue;
             else
                 Damage += item.MagicianValue;
         }
