@@ -33,9 +33,7 @@ namespace LolCase
                     Console.WriteLine("Lütfen Tekrar Seçim Yapınız!");
                 }
                 else
-                {
                     SelectChampions(champion);
-                }
 
             } while (check);
 
