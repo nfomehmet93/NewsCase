@@ -9,6 +9,6 @@ namespace NewsCaseApi.Business.Abstract
     public interface INewsService
     {
         ResponseViewModel GetNewsList();
-        ResponseViewModel GetNewsDetails(int Id);
+        ResponseViewModel GetNewsDetails(int id, bool amp = false);
     }
 }

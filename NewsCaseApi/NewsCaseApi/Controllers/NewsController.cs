@@ -30,9 +30,9 @@ namespace NewsCaseApi.Controllers
                 return BadRequest(response);     
         }
         [HttpGet("{Id}")]
-        public IActionResult GetNews(int Id)
+        public IActionResult GetNews(int id,bool amp=false)
         {
-            var response = _newsService.GetNewsDetails(Id);
+            var response = _newsService.GetNewsDetails(id,amp);
             if (response.IsSuccess)
                 return Ok(response);
 

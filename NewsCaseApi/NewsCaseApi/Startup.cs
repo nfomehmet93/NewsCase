@@ -36,6 +36,7 @@ namespace NewsCaseApi
                     .AllowAnyHeader());
             });
             services.AddScoped<INewsService, NewsManager>();
+            services.AddScoped<IAmpService, AmpManager>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

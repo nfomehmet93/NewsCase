@@ -17,7 +17,7 @@ namespace NewsCaseApi.Middleware
             this.next = next;
         }
 
-        public async Task Invoke(HttpContext context /* other dependencies */)
+        public async Task Invoke(HttpContext context)
         {
             try
             {
